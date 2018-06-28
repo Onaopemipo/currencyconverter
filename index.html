@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Currncy Converter</title>
+	<script type="text/javascript" src="Currencies.json"></script>
+</head>
+<body>
+	<p id="demo"></p>
+	<script>
+let converFrom = document.getElementById('converFrom');
+ let converTo = document.getElementById('converTo');
+ 
+function getCurrency() { 
+fetch('https://free.currencyconverterapi.com/api/v5/convert?q=${converFrom},${converTo}&compact=ultra')
+  //fetch('https://free.currencyconverterapi.com/api/v5/convert?q=USD_PHP&compact=y')
+  .then(  response => {
+    alert(response);
+  
+ return  response.json();
+ })
+  .then(data => {
+   console.log(data.results);
+  	let currencies = data.results;
+  	console.log('data is', currencies);
+    alert('apres');
+ for (curren in currencies){
+ 	alert('for');
+  		let optFrom = document.createElement('option');
+  		let optTo = document.createElement('option');
+  		optFrom.text= curren;
+  		optFrom.value= curren;
+  		optTo.text= curren;
+  		optTo.value= curren;
+  		converTo.appendChild(optTo);
+  		converFrom.appendChild(optFrom);
+  		alert('ffff');
+
+
+  		document.getElementById("inp").value = optTo.value;
+  }
+     
+})
+  .catch(error => console.log('error is', error));
+
+  }
+  alert('end', data);
+</script>
+	<div>
+		<div><h2>Select Currency</h2></div>
+		<form method="POST" action="#">
+			<select name="Currencytoconvert" id="convertFrom">
+				<option value="NGN">NGN</option>
+				<option value="USD">USD</option>
+				<option value="GBP">GBP</option>
+			</select>
+			<input type="number" name="amount" placeholder="1">
+			<input type="text" name="to"  placeholder="To">
+			<select name="Currencyconvertedto" id="convertTo">
+				<option value="NGN">NGN</option>
+				<option value="USD">USD</option>
+				<option value="GBP">GBP</option>
+			</select>
+			<input type="button" name="Convert" value="Convert">
+			<input type="text" name="result" value="">
+		</form>
+
+	</div>
+
+</body>
+</html>
