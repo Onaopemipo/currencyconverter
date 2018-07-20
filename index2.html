@@ -2,10 +2,40 @@
 <html>
 <head>
 	<title>Currncy Converter</title>
-	<link rel="stylesheet" type="text/css" href="boostrap/css/bootstrap.css">
 </head>
-<body style="background-color: #f1f1f1" class="text-center">
+<body>
+	<div id="commments"></div>
 <script>
+
+	function createNode(element)
+	{
+		return document.createElement(element);
+	}
+	function append(parent, child)
+	{
+		return parent.appendChild(child);
+	}
+
+	const Select = document.getElementById('CurrencyFrom');
+
+	//let outputVal = "<select name= 'details'>";
+	//document.getElementById('getIt').addEventListener('click', getText);
+
+	 /* fetch('https://free.currencyconverterapi.com/api/v5/countries')
+	  .then((response) => response.json())
+	   .then((data) => 
+	   {
+	   	let Mydata = data.results;
+	   
+	   	for(i in Mydata)
+	   		{
+	   			console.log(i);
+	   		}
+	   })
+	   
+	   	//let outputVal = "<select name= 'details'>";
+	//document.getElementById('getIt').addEventListener('click', getText);*/
+
 fetch('https://free.currencyconverterapi.com/api/v5/currencies')
 	  .then((response) => response.json())
 	   .then((data) => 
@@ -23,6 +53,7 @@ fetch('https://free.currencyconverterapi.com/api/v5/currencies')
 	   		}
 	   }
 );
+
 
 fetch('https://free.currencyconverterapi.com/api/v5/currencies')
 	  .then((response) => response.json())
@@ -60,50 +91,25 @@ fetch('https://free.currencyconverterapi.com/api/v5/currencies')
             		 var result =  data[i].val;
             		 var amount = document.getElementById("amount").value;
             		 var total = result * amount;
-            		 document.getElementById("result").value = total.toFixed(2);
+            		 document.getElementById("result").value = Math.round(total);
             		}
             	});
         }
 
 </script>
+	<div>
+		<div><h2>Select Currency</h2></div>
+		<form method="POST" action="#">
+		    <input type="number" name="amount" placeholder="1" id="amount">
+			<select name="Currencytoconvert" id="CurrencyFrom">
+			</select>
+			<input type="text" name="to"  placeholder="To" disabled>
+			<select name="Currencyconvertedto" id="CurrencyTo">
+			</select>
+			<input type="text" name="result" id="result">
+			<input type="button" name="Convert" value="Convert" onclick="converter();">
+		</form>
+	</div>
 
-<script type="text/javascript">
-	
-	if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
-}
-</script>
-	<div class="container">
-		<div class="row align-items-center">
-		<div class="col-4"></div>
-			<div class="col-4 md-8" style="border: 5px solid #007bff;">
-				<h2 class="h3 mb-3 font-weight-normal">Currency Converter</h2>
-				<form method="POST" action="#">
-					<label for="amount"><h6>Specify the amount</h6></label>
-				    <input type="number" name="amount" placeholder="1" id="amount" class="form-control"><br>
-				    <label for="CurrencyFrom"><h6>Currency From: </h6></label>
-					<select name="Currencytoconvert" id="CurrencyFrom" class="form-control">
-					</select><br>
-					<input type="text" name="to"  placeholder="To" disabled class="form-control"><br>
-					<label for="Currencytoconvert"><h6>Currency To: </h6></label>
-					<select name="CurrencyTo" id="CurrencyTo" class="form-control">
-					</select><br>
-					<label for="result"><h6>Result</h6></label>
-					<input type="text" name="result" id="result" class="form-control"><br>
-					<input type="button" name="Convert" value="Convert" onclick="converter();" class="btn btn-lg btn-primary btn-block">
-					<p class="mt-5 mb-3 text-muted">&copy; 2018</p>
-				</form>
-			</div>
-		<div class="col-4"></div>
-	</div>
-	</div>
 </body>
 </html>
